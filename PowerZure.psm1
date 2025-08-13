@@ -32,7 +32,13 @@ function Get-AzureToken
     If($AAD){$token = Get-AzAccessToken -ResourceTypeName AadGraph}
     If($REST){$token = Get-AzAccessToken}
     If($Graph){$token = Get-AzAccessToken -ResourceUrl "https://graph.microsoft.com/"}
-    $Headers.Add("Authorization","Bearer"+ " " + "$($token.token)")    
+	
+    # Convert SecureString to plain text
+    $plainToken = [Runtime.InteropServices.Marshal]::PtrToStringAuto(
+        [Runtime.InteropServices.Marshal]::SecureStringToBSTR($token.Token)
+    )
+    # Add Authorization header
+    $Headers.Add("Authorization", "Bearer $plainToken")  
     $Headers
 }
 
