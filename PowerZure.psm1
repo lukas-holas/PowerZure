@@ -1,4 +1,4 @@
-﻿Set-ExecutionPolicy Bypass
+﻿Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Bypass -Force
 Set-Item Env:\SuppressAzurePowerShellBreakingChangeWarnings "true"
 
 
