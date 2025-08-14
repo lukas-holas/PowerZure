@@ -29,10 +29,10 @@ function Get-AzureToken
             $global:GraphToken = $OfficeGraphToken
         }
     }
-    If($AAD){$token = Get-AzAccessToken -ResourceTypeName AadGraph}
-    If($REST){$token = Get-AzAccessToken}
-    If($Graph){$token = Get-AzAccessToken -ResourceUrl "https://graph.microsoft.com/"}
-	
+    If($AAD){$token = Get-AzAccessToken -AsSecureString -ResourceTypeName AadGraph}
+    If($REST){$token = Get-AzAccessToken -AsSecureString}
+    If($Graph){$token = Get-AzAccessToken -AsSecureString -ResourceUrl "https://graph.microsoft.com/"}
+
     # Convert SecureString to plain text
     $plainToken = [Runtime.InteropServices.Marshal]::PtrToStringAuto(
         [Runtime.InteropServices.Marshal]::SecureStringToBSTR($token.Token)
